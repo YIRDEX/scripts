@@ -56,7 +56,7 @@ end
 
 if isBlocked then
 
-    ShowErrorPrompt("YX-脚本中心警告🚫", "你已被服务器检测到\n已启动防600系统(可能会失效）", true)
+    ShowErrorPrompt("YX-脚本中心警告🚫", "该服务器已被禁止使用\n现以踢出防止封禁", true)
 else
 
 end
@@ -276,7 +276,12 @@ ACD:AddButton({
     end
 })
 
-
+ACD:AddButton({
+    Text = "mobileaimbot汉化脚本",
+    Func = function()
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/YIRDEX/China/refs/heads/main/%E9%80%9A%E7%94%A8%E8%84%9A%E6%9C%ACmobileaimbot"))()
+    end
+})
 
 
 
@@ -540,6 +545,12 @@ A22:AddButton({
    loadstring(game:HttpGet("https://raw.githubusercontent.com/YIRDEX/China/refs/heads/main/NodeX%E5%88%80%E5%88%83%E5%89%91.lua"))()
     end
 })
+A22:AddButton({
+    Text = "Achaotic混沌刀刃剑",
+    Func = function()
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/YIRDEX/China/refs/heads/main/Achaotic%E5%88%80%E5%88%83%E7%90%83"))()
+    end
+})
 
 
 
@@ -579,6 +590,13 @@ ABB:AddButton({
     end
 })
 ABB:AddLabel("这边推荐带有尾巴的饰品虚拟形象的人使用")
+
+ABB:AddButton({
+    Text = "免费动作脚本",
+    Func = function()
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/sypcerr/scripts/refs/heads/main/c15.lua",true))()
+    end
+})
 ABB:AddButton({Text="柳叶碰飞(墨水可以使用)",Func=function()
         local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
