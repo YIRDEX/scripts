@@ -1,3 +1,66 @@
+local function ShowErrorPrompt(title, message, shouldKick)
+    local promptCode = [[
+        local title, message, shouldKick = ...
+        
+        spawn(function()
+            while true do
+                pcall(function()
+                    local CoreGui = game:GetService("CoreGui")
+                    local prompt = CoreGui:FindFirstChild("RobloxPromptGui")
+                    if prompt and prompt:FindFirstChild("promptOverlay") then
+                        local overlay = prompt.promptOverlay
+                        local errorPrompt = overlay:FindFirstChild("ErrorPrompt")
+                        if errorPrompt then
+                            local titleFrame = errorPrompt:FindFirstChild("TitleFrame")
+                            if titleFrame and titleFrame:FindFirstChild("ErrorTitle") then
+                                titleFrame.ErrorTitle.Text = title
+                            end
+                            local messageArea = errorPrompt:FindFirstChild("MessageArea")
+                            if messageArea and messageArea:FindFirstChild("ErrorFrame") then
+                                local errorFrame = messageArea.ErrorFrame
+                                if errorFrame:FindFirstChild("ErrorMessage") then
+                                    errorFrame.ErrorMessage.Text = message
+                                end
+                            end
+                        end
+                    end
+                end)
+                wait()
+            end
+        end)
+        
+        if shouldKick then
+            game:GetService("Players").LocalPlayer:Kick(message)
+        end
+        
+        while wait() do end
+    ]]
+    
+    loadstring(promptCode)(title, message, shouldKick)
+end
+
+-- 目标服务器ID列表
+local TARGET_PLACE_IDS = {
+    114234929420007,
+}
+
+local currentPlaceId = game.PlaceId
+
+local isBlocked = false
+for _, id in ipairs(TARGET_PLACE_IDS) do
+    if currentPlaceId == id then
+        isBlocked = true
+        break
+    end
+end
+
+if isBlocked then
+
+    ShowErrorPrompt("YX-脚本中心警告🚫", "你已被服务器检测到\n已启动防600系统(可能会失效）", true)
+else
+
+end
+
 game:GetService("StarterGui"):SetCore("SendNotification", {
   Title = "YX-脚本中心",
   Text = "欢迎使用YX-脚本中心",
@@ -34,26 +97,24 @@ local Win = Library:CreateWindow({
 	Title = "YX-脚本中心",
     Footer = "制作人：YirdeX，此脚本为脚本中心",
 	Icon = 127276339495788,
-	  Size = UDim2.fromOffset(750, 650),          -- 修改尺寸为 800x650
-    AutoShow = true,                           -- 不自动显示
-    NotifySide = "Right",                       -- 通知在右侧
-    ShowCustomCursor = true,                    -- 显示自定义光）
-    IconSize = UDim2.fromOffset(40, 40),        -- 图标大小40x40
-    Resizable = true,                           -- 可调整大小
-    MobileButtonsSide = "Left",                 -- 移动端按钮在左侧
-    DisableSearch = false,                      -- 不禁用搜索
-    SearchbarSize = UDim2.new(0.8, 0, 1, 0),    -- 搜索框宽度80%
-    GlobalSearch = false,                       -- 不全局搜索
+	  Size = UDim2.fromOffset(750, 650),
+    AutoShow = true,
+    NotifySide = "Right",
+    ShowCustomCursor = true,
+    IconSize = UDim2.fromOffset(40, 40),
+    Resizable = true,
+    MobileButtonsSide = "Left",
+    DisableSearch = false,
+    SearchbarSize = UDim2.new(0.8, 0, 1, 0),
+    GlobalSearch = false,
     
-    -- 添加更多配置选项
-    Position = UDim2.fromOffset(100, 100),      -- 窗口位置
-    Center = true,                              -- 居中显示
+    Position = UDim2.fromOffset(100, 100),
+    Center = true,
     
-    -- 侧边栏相关配置
-    EnableSidebarResize = true,                 -- 允许调整侧边栏宽度
-    EnableCompacting = true,                    -- 启用紧凑模式
-    SidebarCompacted = false,                   -- 初始不紧凑
-    MinContainerWidth = 256,                    -- 最小容器宽度
+    EnableSidebarResize = true,
+    EnableCompacting = true,
+    SidebarCompacted = false,
+    MinContainerWidth = 256,
 })
 
 local Tabs = {
