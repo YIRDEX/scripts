@@ -664,7 +664,7 @@ UniversalLeftGroup:AddSlider('UltraWideSlider', {
     end
 })
 UniversalLeftGroup:AddToggle('MyToggle', {
-    Text = '极速旋转',
+    Text = '极速旋转（不要在墨水游戏里使用）',
     Default = false,
     Tooltip = '开启将会快速旋转',
     Callback = function(Value)
